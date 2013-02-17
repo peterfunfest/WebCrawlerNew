@@ -35,16 +35,12 @@ public class WebCrawler extends Observable {
 
 	}
 
-	public URLList visitURL(int level, String url) throws IOException {
+	public void visitURL(String url) throws IOException {
 		
-		System.out.println(level + " - " + url);
-
-		URLList uRLList = new URLList();
-
 		URL u = new URL(url);
 
 //TODO - REMOVE THIS
-        System.out.println("Host      : " + u.getHost());
+//        System.out.println("Host      : " + u.getHost());
 
 		InputStream ins;
 
@@ -104,12 +100,6 @@ public class WebCrawler extends Observable {
 
 		ins.close();
 
-		for (URLListElement e: uRLList.getUrls()) {
-			System.out.println("   " + e.toString());			
-		}
-
-		return uRLList;
-
 	}
 
 	public void crawl(String url) {
@@ -132,14 +122,13 @@ public class WebCrawler extends Observable {
 
 				if (e.getPriority() < MAXIMUM_DEPTH) {
 					
-					URLList extractedURLs = visitURL(e.getPriority(), e.getUrl());
-					urlsVisited.add(e);
+					visitURL(e.getUrl());
 
-					Iterator<URLListElement> innerItr = extractedURLs.getUrls().iterator();
+//					Iterator<URLListElement> innerItr = extractedURLs.getUrls().iterator();
 
-					while (innerItr.hasNext()) {
-						urlsToVisit.add(innerItr.next());
-					}
+	//				while (innerItr.hasNext()) {
+		//				urlsToVisit.add(innerItr.next());
+			//		}
 
 				}
 			} catch (IOException e) {

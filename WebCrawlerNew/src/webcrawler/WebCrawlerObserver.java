@@ -11,7 +11,10 @@ public class WebCrawlerObserver implements Observer {
 		if ( (!(o instanceof WebCrawler)) || (!(arg instanceof WebCrawlerEvent)) ) {
 			throw new IllegalArgumentException();			
 		} else {
-			System.out.println(arg.toString());
+			WebCrawlerEvent we = (WebCrawlerEvent)arg;
+			if ( we.getElement().equals("a") && we.getAttribute().equals("href")) {
+				System.out.println(arg.toString());				
+			}
 			// TODO : Observer code here
 		}
 		
