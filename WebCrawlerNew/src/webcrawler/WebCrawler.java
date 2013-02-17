@@ -38,14 +38,11 @@ public class WebCrawler extends Observable {
 		
 		URL u = new URL(url);
 
-//TODO - REMOVE THIS
-//        System.out.println("Host      : " + u.getHost());
-
 		InputStream ins;
 
 		ins = u.openStream();
 
-		// Trundle through the HTML one element at a time.
+		// Traverse the HTML one element at a time.
 
 		while (hr.readUntil(ins, '<', '<')) {
 
@@ -73,10 +70,7 @@ public class WebCrawler extends Observable {
 							attributeValue = token.substring(0,token.length() - 1);
 						}
 					} else {
-						// TODO - element value is not quoted - presents a
-						// problem!!
-						// need some test cases for this.
-						// ignore for now as it is a rare event - I hope.
+						// Element value is not quoted.
 						token = hr.readString(ins, ' ', '>');
 						attributeValue = token;
 					}
@@ -98,8 +92,8 @@ public class WebCrawler extends Observable {
 		urlsToVisit.add(0, url);
 
 		//
-		// Because we are about to transmogrify urlsToVisit, we can't iterate
-		// over it in the conventional way - lest there is a
+		// Because we are about to alter urlsToVisit, we can't iterate
+		// over it in the conventional way - otherwise there is a
 		// java.util.ConcurrentModificationException
 		//
 
