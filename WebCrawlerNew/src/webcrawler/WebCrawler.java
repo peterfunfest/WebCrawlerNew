@@ -3,7 +3,6 @@ package webcrawler;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.Iterator;
 import java.util.Observable;
 
 public class WebCrawler extends Observable {
@@ -72,8 +71,6 @@ public class WebCrawler extends Observable {
 						token = hr.readString(ins, '"', '"');
 						if (token != null) {
 							attributeValue = token.substring(0,token.length() - 1);
-//							uRLList.add(level+1, attributeValue);
-//							uRLList.add(level+1, expandURL(u, attributeValue));
 						}
 					} else {
 						// TODO - element value is not quoted - presents a
@@ -81,16 +78,10 @@ public class WebCrawler extends Observable {
 						// need some test cases for this.
 						// ignore for now as it is a rare event - I hope.
 						token = hr.readString(ins, ' ', '>');
-						attributeValue = "**********"+token;
-//						if (element.equals("a")) {
-	//						uRLList.add(level+1, "TODO-UNKNOWN:" + token);
-		//				}
+						attributeValue = token;
 					}
 					setChanged();
 					notifyObservers(new WebCrawlerEvent(element,attribute,attributeValue));
-//	                System.out.print(element);
-	//                System.out.print("-" + attribute);
-	  //              System.out.println("      " + attributeValue);
 					token = hr.readString(ins, '=', '>');
 				}
 
