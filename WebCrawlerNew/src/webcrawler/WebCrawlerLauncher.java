@@ -1,6 +1,6 @@
 package webcrawler;
 
-public class Launcher {
+public class WebCrawlerLauncher {
 
 	public static void main(String[] args) {
 
